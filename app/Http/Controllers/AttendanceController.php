@@ -60,4 +60,33 @@ class AttendanceController extends Controller
 
         return response()->json(['data' => $attendance]);
     }
+
+    public function history(Request $request)
+    {
+        $query = Attendance::where('user_id', $request->user()->id);
+
+        if ($request->has('month') && $request->has('year')) {
+            $query->whereMonth('date', $request->month)
+                  ->whereYear('date', $request->year);
+        }
+
+        $attendances = $query->orderBy('date', 'desc')->get();
+
+        $totalDays = $attendances->count();
+        $presentCount = $attendances->where('status', 'present')->count();
+        $absentCount = $attendances->where('status', 'absent')->count();
+        $lateCount = $attendances->where('status', 'late')->count();
+        $percentage = $totalDays > 0 ? round(($presentCount / $totalDays) * 100, 1) : 0;
+
+        return response()->json([
+            'stats' => [
+                'total_days' => $totalDays,
+                'present' => $presentCount,
+                'absent' => $absentCount,
+                'late' => $lateCount,
+                'percentage' => $percentage,
+            ],
+            'data' => $attendances
+        ]);
+    }
 }

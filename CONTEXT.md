@@ -102,8 +102,8 @@ lib/
 |---|---|---|
 | Splash | ✅ Done | Auto-navigates to Login after delay |
 | Login | ✅ Laravel API connected | `/api/login` working, Sanctum token saved using `shared_preferences` |
-| Dashboard | ✅ Done | Hero check-in, stats, announcements, quick actions, holiday |
-| Attendance | ✅ Done | Status card (Check In/Out), Overview grid, week strip (tap to view day) |
+| Dashboard | ✅ Connected | TopBar (/api/user) & HeroCheckinCard (/api/attendance/today, /check-in, /check-out) connected |
+| Attendance | ✅ Connected | `/api/attendance/history` API connected (Month card, Overview grid, Date strip, Day detail) |
 | Leave | ✅ Done | 3 tabs: My Leaves (timeline history), Apply Leave (form), Leave Balance (progress bars) |
 | Payslip | ✅ Done | List → tap → detail with earnings/deductions breakdown |
 | Profile | ✅ Done | Header card, quick stats, personal info, settings list, logout |
@@ -115,7 +115,9 @@ lib/
 - Flutter physical-device → Laravel connection ✅
 - Login API tested successfully on physical device ✅
 - Sanctum token saved locally using shared_preferences ✅
-- Protected `/api/user` integration currently being tested 🔄
+- Protected `/api/user` integration completed in DashboardTopBar ✅
+- Attendance history API created in Laravel & connected in Attendance screen ✅
+- Real-time Slide to Punch In/Out connected on Dashboard (`/api/attendance/today`, `check-in`, `check-out`) ✅
 
 ## Key Implementation Patterns
 - **Navigation:** Bottom-nav tabs (Home/Attendance/Leave/Payslip/Profile) managed via `IndexedStack`-like pattern in `dashboard_screen.dart` (`_currentIndex` state). Other screens pushed via `Navigator.push(context, slideRoute(...))` custom transition.
@@ -124,19 +126,15 @@ lib/
 - **Not yet built:** Change Password / Change PIN screens (placeholders only, `onTap: () {}`).
 
 ## Next Flutter Integration Steps
-1. Complete `/api/user` protected API test
-2. Connect Dashboard/Profile user data
-3. Create Attendance History API in Laravel
-4. Connect Attendance screen + Dashboard punch to backend
-5. Connect Leave screen
-6. Connect Payslip screen
-7. Connect Holiday Calendar
-8. Improve logout/token handling
-9. Later refactor common API calls into service classes if needed
-10. Introduce BLoC/state management after multiple screens are API-connected
+1. Connect Profile screen user data (`/api/user`)
+2. Connect Leave screen (Leave history & Apply leave)
+3. Connect Payslip screen
+4. Connect Holiday Calendar (`/api/holidays`)
+5. Improve logout/token handling
+6. Later refactor common API calls into service classes if needed
+7. Introduce BLoC/state management after multiple screens are API-connected
 
 ## Backend Pending
-- Attendance history endpoint
 - Leave approve/reject (only if admin functionality required)
 - Better validation/error handling
 - Admin features later if required

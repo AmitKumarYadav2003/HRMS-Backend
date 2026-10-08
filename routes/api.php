@@ -6,6 +6,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\PayslipController;
 use App\Http\Controllers\HolidayController;
+use App\Http\Controllers\UserController;
 
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -13,9 +14,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/user', function (Illuminate\Http\Request $request) {
-        return $request->user();
-    });
+    Route::get('/user', [UserController::class, 'profile']);
     Route::post('/attendance/check-in', [AttendanceController::class, 'checkIn']);
     Route::post('/attendance/check-out', [AttendanceController::class, 'checkOut']);
     Route::get('/attendance/today', [AttendanceController::class, 'today']);

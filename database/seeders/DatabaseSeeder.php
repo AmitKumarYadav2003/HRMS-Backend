@@ -17,9 +17,28 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::updateOrCreate(
+    ['email' => 'admin@hrms.com'],
+    [
+        'name' => 'Admin User',
+        'password' => \Hash::make('admin123'),
+        'role' => 'admin',
+        'department' => 'Admin',
+        'designation' => 'Administrator',
+    ]
+);
+
+// Employee user bhi add kar
+User::updateOrCreate(
+    ['email' => 'amit01@gmail.com'],
+    [
+        'name' => 'Amit Yadav',
+        'password' => \Hash::make('amit1234'),
+        'role' => 'employee',
+        'department' => 'IT',
+        'designation' => 'Software Developer',
+    ]
+);
+
     }
 }

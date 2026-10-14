@@ -61,6 +61,7 @@ class DashboardController extends Controller
             ->limit(5)
             ->get();
 
+        // compact() variables ko Blade view tak pass karta hai.    
         return view('admin.dashboard', compact(
             'totalEmployees',
             'presentToday',

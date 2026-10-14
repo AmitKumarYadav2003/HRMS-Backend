@@ -13,6 +13,7 @@ class Leave extends Model
         'leave_type',
         'reason',
         'status',
+        'admin_remarks',
     ];
 
     public function user()

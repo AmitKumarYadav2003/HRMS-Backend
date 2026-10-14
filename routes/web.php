@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\LeaveController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,4 +24,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     
     Route::get('/dashboard', [DashboardController::class, 'adminDashboard'])
         ->name('admin.dashboard');
+    Route::get('/leaves', [LeaveController::class, 'index'])
+    ->name('admin.leaves.index');
+
+    Route::post('/leaves/{id}/status', [LeaveController::class, 'updateStatus'])
+    ->name('admin.leaves.updateStatus');    
 });

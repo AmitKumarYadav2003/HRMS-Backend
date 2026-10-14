@@ -36,4 +36,48 @@ class LeaveController extends Controller
 
         return response()->json(['data' => $leaves]);
     }
+
+    public function balance(Request $request)
+{
+    $userId = $request->user()->id;
+
+    $limits = [
+        'Earned' => 12,
+        'Sick' => 5,
+        'Casual' => 10,
+    ];
+
+    $balance = [];
+
+    foreach ($limits as $type => $total) {
+        $used = Leave::where('user_id', $userId)
+            ->where('leave_type', $type)
+            ->where('status', 'approved')
+            ->get()
+->sum(function ($leave) {
+    $start = \Carbon\Carbon::parse($leave->from_date);
+    $end = \Carbon\Carbon::parse($leave->to_date);
+
+    $days = 0;
+
+    while ($start->lte($end)) {
+        if ($start->dayOfWeek !== \Carbon\Carbon::SUNDAY) {
+            $days++;
+        }
+
+        $start->addDay();
+    }
+
+    return $days;
+});
+
+        $balance[strtolower($type)] = [
+            'total' => $total,
+            'used' => $used,
+            'remaining' => max(0, $total - $used),
+        ];
+    }
+
+    return response()->json(['data' => $balance]);
+}
 }

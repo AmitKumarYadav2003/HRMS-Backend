@@ -58,6 +58,7 @@
             <nav>
                 <a href="{{ route('admin.dashboard') }}" class="@if(request()->routeIs('admin.dashboard')) active @endif">📊 Dashboard</a>
                 <a href="{{ route('admin.leaves.index') }}" class="@if(request()->routeIs('admin.leaves.*')) active @endif">📅 Leave Management</a>
+                <a href="{{ route('admin.announcements.index') }}" class="@if(request()->routeIs('admin.announcements*')) active @endif">📢 Announcements</a>
                
                 <hr style="border-color: rgba(255,255,255,0.2);">
                 <form action="{{ route('admin.logout') }}" method="POST" class="d-inline">

@@ -7,7 +7,7 @@ use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\PayslipController;
 use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\AnnouncementController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -26,5 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/payslip/history', [PayslipController::class, 'history']);
     Route::get('/holidays', [HolidayController::class, 'list']);
+
+    Route::get('/announcements', [AnnouncementController::class, 'index']);
 
 });

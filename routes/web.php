@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\LeaveController;
+use App\Http\Controllers\Admin\AnnouncementController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,4 +30,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     Route::post('/leaves/{id}/status', [LeaveController::class, 'updateStatus'])
     ->name('admin.leaves.updateStatus');    
+
+    Route::resource('announcements', AnnouncementController::class)
+    ->names('admin.announcements')
+    ->only(['index', 'create', 'store', 'destroy']);
+
+    Route::patch('announcements/{announcement}/toggle', [AnnouncementController::class, 'toggle'])
+    ->name('admin.announcements.toggle');
 });

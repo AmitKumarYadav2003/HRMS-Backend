@@ -28,6 +28,8 @@ class User extends Authenticatable
         'designation',
         'phone',
         'date_of_joining',
+        'role',
+        'is_active',
     ];
 
     /**
@@ -46,10 +48,13 @@ class User extends Authenticatable
      * @return array<string, string>
      */
     protected function casts(): array
+    //cast mtlb ye whenever we get the data from database it will be converted to the type we have defined in the casts array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean',
+            'date_of_joining' => 'date:Y-m-d',
         ];
     }
 }

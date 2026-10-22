@@ -43,6 +43,11 @@ class AuthController extends Controller
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
 
+        if (!$user->is_active) {
+            return response()->json(['message' => 'Your account is inactive. Please contact the administrator.'], 403);
+        }
+        //403 - access allowed nhi hai, 401 - invalid credentials
+
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([

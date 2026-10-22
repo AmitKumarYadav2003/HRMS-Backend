@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\LeaveController;
 use App\Http\Controllers\Admin\AnnouncementController;
+use App\Http\Controllers\Admin\EmployeeController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,4 +38,21 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     Route::patch('announcements/{announcement}/toggle', [AnnouncementController::class, 'toggle'])
     ->name('admin.announcements.toggle');
+
+    Route::get('employees', [EmployeeController::class, 'index'])
+    ->name('admin.employees.index');
+
+    Route::patch('employees/{user}/toggle', [EmployeeController::class, 'toggle'])
+    ->name('admin.employees.toggle');
+
+    Route::get('employees/create', [EmployeeController::class, 'create'])
+    ->name('admin.employees.create');
+
+Route::post('employees', [EmployeeController::class, 'store'])
+    ->name('admin.employees.store');
+    Route::get('employees/{user}/edit', [EmployeeController::class, 'edit'])
+    ->name('admin.employees.edit');
+
+Route::put('employees/{user}', [EmployeeController::class, 'update'])
+    ->name('admin.employees.update');
 });

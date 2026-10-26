@@ -42,12 +42,12 @@ body { font-family: 'Inter', sans-serif; }
 }
 .brand-logo {
     width: 40px; height: 40px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #F2994A, #E67E22);
+    border-radius: 14px;
+    background: linear-gradient(135deg, #d99c67, #ea9c73);
     display: grid; place-items: center;
     font-family: 'Poppins', sans-serif;
     font-weight: 800; font-size: 14px;
-    box-shadow: 0 4px 12px rgba(242, 153, 74, 0.35);
+    box-shadow: 0 4px 12px rgba(242, 152, 74, 0.29);
 }
 .brand-name { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15.5px; }
 .brand-sub { font-size: 11px; color: rgba(255, 255, 255, 0.55); }
@@ -192,10 +192,10 @@ body { font-family: 'Inter', sans-serif; }
             <span class="nav-icon"><i class="bi bi-megaphone-fill"></i></span> Announcements
         </a>
 
-        <div class="nav-section">Coming soon</div>
-        <a href="#" class="nav-item disabled">
-            <span class="nav-icon"><i class="bi bi-calendar-event-fill"></i></span> Holidays <span class="soon">Soon</span>
-        </a>
+        <!-- <div class="nav-section">Coming soon</div> -->
+        <a href="{{ route('admin.holidays.index') }}" class="nav-item @if(request()->routeIs('admin.holidays*')) active @endif">
+    <span class="nav-icon"><i class="bi bi-calendar-event-fill"></i></span> Holidays
+</a>
         <a href="#" class="nav-item disabled">
             <span class="nav-icon"><i class="bi bi-cash-stack"></i></span> Payslips <span class="soon">Soon</span>
         </a>

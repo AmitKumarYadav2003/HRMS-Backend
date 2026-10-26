@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\LeaveController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\HolidayController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -48,11 +49,15 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('employees/create', [EmployeeController::class, 'create'])
     ->name('admin.employees.create');
 
-Route::post('employees', [EmployeeController::class, 'store'])
+    Route::post('employees', [EmployeeController::class, 'store'])
     ->name('admin.employees.store');
     Route::get('employees/{user}/edit', [EmployeeController::class, 'edit'])
     ->name('admin.employees.edit');
 
-Route::put('employees/{user}', [EmployeeController::class, 'update'])
+    Route::put('employees/{user}', [EmployeeController::class, 'update'])
     ->name('admin.employees.update');
+
+    Route::resource('holidays', HolidayController::class)
+    ->names('admin.holidays')
+    ->only(['index', 'create', 'store', 'destroy']);
 });

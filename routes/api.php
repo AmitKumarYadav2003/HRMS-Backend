@@ -25,6 +25,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/leave/balance', [LeaveController::class, 'balance']);
 
     Route::get('/payslip/history', [PayslipController::class, 'history']);
+    Route::get('/payslip/{payslip}', [PayslipController::class, 'show']);
+
     Route::get('/holidays', [HolidayController::class, 'list']);
 
     Route::get('/announcements', [AnnouncementController::class, 'index']);

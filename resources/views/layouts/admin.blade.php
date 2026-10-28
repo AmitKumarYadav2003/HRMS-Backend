@@ -196,9 +196,9 @@ body { font-family: 'Inter', sans-serif; }
         <a href="{{ route('admin.holidays.index') }}" class="nav-item @if(request()->routeIs('admin.holidays*')) active @endif">
     <span class="nav-icon"><i class="bi bi-calendar-event-fill"></i></span> Holidays
 </a>
-        <a href="#" class="nav-item disabled">
-            <span class="nav-icon"><i class="bi bi-cash-stack"></i></span> Payslips <span class="soon">Soon</span>
-        </a>
+        <a href="{{ route('admin.payroll.index') }}" class="nav-item @if(request()->routeIs('admin.payroll*')) active @endif">
+    <span class="nav-icon"><i class="bi bi-cash-coin"></i></span> Payroll
+</a>
     </nav>
 
     <div class="user-card">

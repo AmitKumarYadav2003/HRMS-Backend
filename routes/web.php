@@ -34,6 +34,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/leaves/{id}/status', [LeaveController::class, 'updateStatus'])
     ->name('admin.leaves.updateStatus');    
 
+    // Announcement Routes
     Route::resource('announcements', AnnouncementController::class)
     ->names('admin.announcements')
     ->only(['index', 'create', 'store', 'destroy']);
@@ -41,6 +42,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::patch('announcements/{announcement}/toggle', [AnnouncementController::class, 'toggle'])
     ->name('admin.announcements.toggle');
 
+    // Employee Routes
     Route::get('employees', [EmployeeController::class, 'index'])
     ->name('admin.employees.index');
 
@@ -58,29 +60,31 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::put('employees/{user}', [EmployeeController::class, 'update'])
     ->name('admin.employees.update');
 
+    // Holiday Routes
     Route::resource('holidays', HolidayController::class)
     ->names('admin.holidays')
     ->only(['index', 'create', 'store', 'destroy']);
 
+    // Payroll Routes
 
     Route::get('payroll', [PayrollController::class, 'index'])
     ->name('admin.payroll.index');
 
-Route::get('payroll/create', [PayrollController::class, 'create'])
+    Route::get('payroll/create', [PayrollController::class, 'create'])
     ->name('admin.payroll.create');
 
-Route::post('payroll', [PayrollController::class, 'store'])
+    Route::post('payroll', [PayrollController::class, 'store'])
     ->name('admin.payroll.store');
 
-Route::get('payroll/{payslip}', [PayrollController::class, 'show'])
+    Route::get('payroll/{payslip}', [PayrollController::class, 'show'])
     ->name('admin.payroll.show');
 
-Route::get('payroll/{payslip}/edit', [PayrollController::class, 'edit'])
+    Route::get('payroll/{payslip}/edit', [PayrollController::class, 'edit'])
     ->name('admin.payroll.edit');
 
-Route::put('payroll/{payslip}', [PayrollController::class, 'update'])
+    Route::put('payroll/{payslip}', [PayrollController::class, 'update'])
     ->name('admin.payroll.update');
 
-Route::patch('payroll/{payslip}/approve', [PayrollController::class, 'approve'])
+    Route::patch('payroll/{payslip}/approve', [PayrollController::class, 'approve'])
     ->name('admin.payroll.approve');
 });

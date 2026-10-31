@@ -15,6 +15,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', [UserController::class, 'profile']);
+
     Route::post('/attendance/check-in', [AttendanceController::class, 'checkIn']);
     Route::post('/attendance/check-out', [AttendanceController::class, 'checkOut']);
     Route::get('/attendance/today', [AttendanceController::class, 'today']);
@@ -30,5 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/holidays', [HolidayController::class, 'list']);
 
     Route::get('/announcements', [AnnouncementController::class, 'index']);
+
+    Route::post('/change-password', [AuthController::class, 'changePassword']);
 
 });

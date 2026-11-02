@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
     ['email' => 'admin@hrms.com'],
     [
         'name' => 'Admin User',
-        'password' => \Hash::make('admin123'),
+        'password' => \Hash::make('admin@sfev01'),
         'role' => 'admin',
         'department' => 'Admin',
         'designation' => 'Administrator',

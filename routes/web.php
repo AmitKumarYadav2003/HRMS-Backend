@@ -18,6 +18,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])
         ->name('admin.login');
     Route::post('/login', [AuthController::class, 'login'])
+    ->middleware('throttle:5,1') // Limit login attempts to 5 per minute
         ->name('admin.login.submit');
 });
 

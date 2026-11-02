@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
@@ -13,13 +14,13 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-        ]);
+'password' => ['required', 'confirmed', Password::min(8)->letters()->numbers()],        ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'employee', // Default role for new users
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
@@ -66,8 +67,7 @@ class AuthController extends Controller
 {
     $request->validate([
         'current_password' => 'required',
-        'new_password' => 'required|string|min:8|confirmed',
-    ]);
+'new_password' => ['required', 'confirmed', Password::min(8)->letters()->numbers()],    ]);
 
     $user = $request->user();
 
